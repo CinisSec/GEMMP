@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GWP2
+namespace GEMMP
 {
     public class Media
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace GWP2
+namespace GEMMP
 {
     /// <summary>
     /// Interaction logic for App.xaml

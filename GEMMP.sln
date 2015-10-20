@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GWP2", "GWP2\GWP2.csproj", "{1DE471E0-FDDE-45D6-AC84-7A04910AFBD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GEMMP", "GWP2\GEMMP.csproj", "{1DE471E0-FDDE-45D6-AC84-7A04910AFBD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace GWP2
+namespace GEMMP
 {
     public class Playlist
     {

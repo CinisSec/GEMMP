@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace GWP2
+namespace GEMMP
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -1,4 +1,4 @@
-﻿<Window x:Class="GWP2.MainWindow"
+﻿<Window x:Class="GEMMP.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="GEMMP" Height="500" Width="760" MinWidth="760" MinHeight="500">
