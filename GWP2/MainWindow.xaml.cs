@@ -21,20 +21,9 @@ namespace GEMMP
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    /// TODO 
-    /// - Error Handling other files than Video & Music
-    /// - Filtering open dialog
-    /// - Filtering Drag & Drop
-    /// - Volume change less brutal
-    /// - Volume change everywhere not only on player
-    /// - Removing Playing Now / Only show when playing
-    /// - Removing Single items out of playlist
-    /// CRASHES
-    /// GIF,JPG playing
     public partial class MainWindow : Window
     {
         public Playlist brain;
-        private bool _darkmode = false;
         private bool _isDragging = false;
         TimeSpan _position;
         private DispatcherTimer _timer = new DispatcherTimer();
@@ -67,7 +56,7 @@ namespace GEMMP
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "All files (*.*)|*.*";
             openFileDialog.Multiselect = true;
-            if (openFileDialog.ShowDialog() == true )
+            if (openFileDialog.ShowDialog() == true)
             {
                 foreach (string filename in openFileDialog.FileNames)
                 {
@@ -89,31 +78,31 @@ namespace GEMMP
         }
 
 
-        
+
         public void btnPlayPause_Click(object sender, RoutedEventArgs e)
         {
-                if (brain.IsPlaying == true)
-                {
-                    btnPlay.Content = FindResource("Play");
-                    brain.Play();
-                }
-                else
-                {
-                    btnPlay.Content = FindResource("Pause");
-                    brain.Play();
-                }
+            if (brain.IsPlaying == true)
+            {
+                btnPlay.Content = FindResource("Play");
+                brain.Play();
+            }
+            else
+            {
+                btnPlay.Content = FindResource("Pause");
+                brain.Play();
+            }
         }
 
         public void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
             this.brain.Previous();
-            lstPlaylist.SelectedIndex = brain.ActiveIndex;
+            //lstPlaylist.SelectedIndex = brain.ActiveIndex;
         }
 
         public void btnNext_Click(object sender, RoutedEventArgs e)
         {
             this.brain.Next();
-            lstPlaylist.SelectedIndex = brain.ActiveIndex;
+            //lstPlaylist.SelectedIndex = brain.ActiveIndex;
         }
 
         public ObservableCollection<Media> Medias
@@ -123,7 +112,7 @@ namespace GEMMP
 
         private void Player_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-                vplayer.Volume += (e.Delta > 0) ? 0.1 : -0.1;
+            vplayer.Volume += (e.Delta > 0) ? 0.1 : -0.1;
         }
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
@@ -149,7 +138,7 @@ namespace GEMMP
 
         private void lstPlaylist_Selected(object sender, RoutedEventArgs e)
         {
-            lstPlaylist.SelectedIndex = brain.ActiveIndex;
+            //lstPlaylist.SelectedIndex = brain.ActiveIndex;
         }
 
         private void vplayer_MediaOpened(object sender, RoutedEventArgs e)
@@ -161,8 +150,6 @@ namespace GEMMP
 
         private void pgbProgress_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            //int pos = Convert.ToInt32(pgbProgress.Value);
-            //vplayer.Position = new TimeSpan(0, 0, 0, pos, 0);
             if (vplayer.Source != null)
             {
                 long videoPositon = Convert.ToInt64(vplayer.NaturalDuration.TimeSpan.Ticks * (pgbProgress.Value / pgbProgress.Maximum));
@@ -183,37 +170,15 @@ namespace GEMMP
             pgbVolume.Visibility = System.Windows.Visibility.Hidden;
         }
 
-        private void btnLight_Click(object sender, RoutedEventArgs e)
-        {
-            if (_darkmode == false)
-            {
+        //private void pgbProgress_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    pgbProgress.Height = 10;
+        //}
 
-            }
-            else
-            {
-                MainGrid.Background = Brushes.Black;
-                Tabs.Background = Brushes.Black;
-                btnLoad.Background = Brushes.DarkGray;
-                btnPlay.Background = Brushes.DarkGray;
-                btnPrevious.Background = Brushes.DarkGray;
-                btnNext.Background = Brushes.DarkGray;
-                btnStop.Background = Brushes.DarkGray;
-                btnLight.Background = Brushes.DarkGray;
-            }
-
-
-
-        }
-
-        private void pgbProgress_MouseEnter(object sender, MouseEventArgs e)
-        {
-            pgbProgress.Height = 10;
-        }
-
-        private void pgbProgress_MouseLeave(object sender, MouseEventArgs e)
-        {
-            pgbProgress.Height = 3;
-        }
+        //private void pgbProgress_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    pgbProgress.Height = 3;
+        //}
 
         private void pgbProgress_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -235,7 +200,7 @@ namespace GEMMP
             }
         }
 
-        private void File_DragEnter(object sender, DragEventArgs e)
+        private void File_DropEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -253,6 +218,42 @@ namespace GEMMP
                 btnPrevious.IsEnabled = true;
                 btnStop.IsEnabled = true;
             }
+        }
+
+        private void MediaFilter_DragOver(object sender, DragEventArgs e)
+        {
+            bool dropEnabled = true;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+            {
+                string[] filenames = e.Data.GetData(DataFormats.FileDrop, true) as string[];
+
+                foreach (string filename in filenames)
+                {
+                    if (System.IO.Path.GetExtension(filename).ToUpperInvariant() != ".MP3"
+                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() != ".MKV"
+                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() != ".MP4"
+                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() != ".FLV"
+                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() != ".FLAC")
+                    {
+                        dropEnabled = false;
+                    }
+                    else
+                    {
+                        dropEnabled = true;
+                    }
+
+                    if (!dropEnabled)
+                    {
+                        e.Effects = DragDropEffects.None;
+                        e.Handled = true;
+                    }
+                }
+            }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
