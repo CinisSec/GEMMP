@@ -229,17 +229,17 @@ namespace GEMMP
 
                 foreach (string filename in filenames)
                 {
-                    if (System.IO.Path.GetExtension(filename).ToUpperInvariant() != ".MP3"
-                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() != ".MKV"
-                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() != ".MP4"
-                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() != ".FLV"
-                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() != ".FLAC")
+                    if (System.IO.Path.GetExtension(filename).ToUpperInvariant() == ".MP3"
+                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() == ".MKV"
+                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() == ".MP4"
+                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() == ".FLV"
+                        || System.IO.Path.GetExtension(filename).ToUpperInvariant() == ".FLAC")
                     {
-                        dropEnabled = false;
+                        dropEnabled = true;
                     }
                     else
                     {
-                        dropEnabled = true;
+                        dropEnabled = false;
                     }
 
                     if (!dropEnabled)
