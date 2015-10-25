@@ -51,7 +51,7 @@ namespace GEMMP
         }
 
 
-        public void btnLoad_Click(object sender, RoutedEventArgs e)
+        public void mnuLoad_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "All files (*.*)|*.*";
@@ -163,11 +163,19 @@ namespace GEMMP
         {
             pgbProgress.Visibility = System.Windows.Visibility.Visible;
             pgbVolume.Visibility = System.Windows.Visibility.Visible;
+            btnPlay.Visibility = System.Windows.Visibility.Visible;
+            btnPrevious.Visibility = System.Windows.Visibility.Visible;
+            btnStop.Visibility = System.Windows.Visibility.Visible;
+            btnNext.Visibility = System.Windows.Visibility.Visible;
         }
         private void Player_MouseLeave(object sender, MouseEventArgs e)
         {
             pgbProgress.Visibility = System.Windows.Visibility.Hidden;
             pgbVolume.Visibility = System.Windows.Visibility.Hidden;
+            btnPlay.Visibility = System.Windows.Visibility.Hidden;
+            btnPrevious.Visibility = System.Windows.Visibility.Hidden;
+            btnStop.Visibility = System.Windows.Visibility.Hidden;
+            btnNext.Visibility = System.Windows.Visibility.Hidden;
         }
 
         //private void pgbProgress_MouseEnter(object sender, MouseEventArgs e)
@@ -220,6 +228,11 @@ namespace GEMMP
             }
         }
 
+        public void mnuClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void MediaFilter_DragOver(object sender, DragEventArgs e)
         {
             bool dropEnabled = true;
@@ -251,9 +264,9 @@ namespace GEMMP
             }
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+
+
+
+
     }
 }

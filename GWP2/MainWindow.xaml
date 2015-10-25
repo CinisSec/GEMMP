@@ -10,9 +10,9 @@
     </Window.Resources>
     <Grid Name="MainGrid" >
         <Menu Height="25" VerticalAlignment="Top" >
-            <MenuItem Header="File" Height="25" Width="40" Click="MenuItem_Click">
-                <MenuItem Header="Open" Click="btnLoad_Click"/>
-                <MenuItem Header="Close"/>
+            <MenuItem Header="File" Height="25" Width="40">
+                <MenuItem Header="Open" Click="mnuLoad_Click"/>
+                <MenuItem Header="Close" Click="mnuClose_Click"/>
             </MenuItem>
             <MenuItem Header="Media" Height="25" Width="51">
                 <MenuItem Header="Playlist">
@@ -27,7 +27,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <Grid Margin="0,25,0,0" Background="Black" >
+        <Grid Margin="0,25,0,0" Background="Black" MouseEnter="Player_MouseEnter"  MouseLeave="Player_MouseLeave">
             <MediaElement x:Name="vplayer" LoadedBehavior="Manual" UnloadedBehavior="Manual" MediaOpened="vplayer_MediaOpened" MediaEnded="vplayer_MediaEnded" />
             <ProgressBar x:Name="pgbProgress" Value="{Binding Path=Position,Mode=TwoWay, ElementName=vplayer}" Margin="188,0,188,40" BorderBrush="#FF787777" Foreground="#FF009737" Background="Black" Height="9" VerticalAlignment="Bottom"  RenderTransformOrigin="0.5,0.5" Visibility="Visible" MouseLeftButtonDown="pgbProgress_MouseLeftButtonDown" MouseLeftButtonUp="pgbProgress_MouseLeftButtonUp" />
             <ProgressBar x:Name="pgbVolume" Value="{Binding Path=Volume , ElementName=vplayer}" Maximum="1" BorderBrush="#FF787777" Background="Black" Height="8" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="96" Foreground="#FF0074FF" Visibility="Visible" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,85">
