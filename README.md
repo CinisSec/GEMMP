@@ -1,4 +1,4 @@
 
 # GEMMP
 
-Small media player build from scratch in C#.
+Small media player built from scratch in C#.
